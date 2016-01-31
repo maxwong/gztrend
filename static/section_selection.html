@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<meta charset="utf-8">
+<title>模块选择</title>
+<script type="text/javascript" src="lib/js/jquery-1.12.0.min.js"></script>
+<script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="lib/css/bootstrap.min.css">
+<link rel="stylesheet" href="lib/css/bootstrap-theme.min.css">
+
+<style>
+</style>
+</head>
+<body>
+<div class="container">
+    <div id="header"></div>
+    <div class="panel-group">
+        <div class="panel panel-info">
+            <div class="panel-heading"><h4>水处理系统</h4></div>
+            <div class="panel-body">
+                <h5>请选择需要的模块</h5>
+                <hr/>
+                <div class="btn-group-vertical" data-toggle="buttons">
+                    <label class="btn btn-default active">
+                        <input type="checkbox">池1
+                    </label>
+                    <label class="btn btn-default">
+                        <input type="checkbox">池2
+                    </label>
+                    <label class="btn btn-default">
+                        <input type="checkbox">池3
+                    </label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="panel-footer">
+            <button id="submit" type="button" class="btn btn-default" onclick="queryId();">提交</button>
+        </div>
+    </div>
+</div>
+<hr/>
+<div id="result" class="container">
+</div>
+<div id="footer"></div>
+</body>
+</html>

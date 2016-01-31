@@ -1,0 +1,33 @@
+{
+	'plan_id':$plan_id, 
+	'name':'$name', 
+	'section_relation':'$section_relation', 
+	'description':'$description', 
+	'footer':'$footer', 
+	'comments':'$comments',
+
+	'sections':[
+					{
+						'section_id':$section_id,
+						'name':'$name',
+						'sequence':$section_sequence,
+						'description':'$description',
+						'layer':$layer
+						'materials': [
+							'material_id':$material_id,
+							'name':'$name',
+							'type':'$type',
+							'spec':'$spec',
+							'brand':'$brand',
+							'unit':'$unit',
+							'unit_price':$unit_price,
+							'comments':'$comments',
+							'is_fixed_amount':true/false,
+							'priority':$priority,
+							'sequence':$sequence,
+							'default_quantity':$default_quantity
+				}
+			]
+		}
+	]
+}

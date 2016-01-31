@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<meta charset="utf-8">
+<title>93WiFi运营小工具</title>
+<script type="text/javascript" src="lib/js/jquery-1.12.0.min.js"></script>
+<script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="lib/css/bootstrap.min.css">
+<link rel="stylesheet" href="lib/css/bootstrap-theme.min.css">
+
+<style>
+</style>
+</head>
+<body>
+<div class="container">
+    <div id="header"></div>
+    <div class="panel-group">
+        <div class="panel panel-danger">
+            <div class="panel-heading"><h4>必填项</h4></div>
+            <div class="panel-body">
+                <div>
+                    <label class="col-sm-2 control-label">开始时间:</label>
+                    <span class="col-sm-3"><input type="text" id="start_time" name="start_time" required></span>
+                    <label class="col-sm-7">(2015-01-01 | 2015-01-01 15:30:30，不写时分秒则默认为00:00:00)</label>
+                </div>
+                <br></br>
+                <div>
+                    <label class="col-sm-2 control-label">结束时间:</label>
+                    <span class="col-sm-3"><input type="text" id="end_time" name="end_time"></span>
+                    <label class="col-sm-7">(2015-12-31 | 2015-12-31 23:30:30，不写时分秒则默认为00:00:00)</label>
+                </div>
+                <br></br>
+                <div>
+                    <label class="col-sm-2 control-label">设备序列号:</label>
+                    <span class="col-sm-3"><textarea id="gw_id" name="gw_id" rows="5"></textarea></span>
+                    <label class="col-sm-7">(可输入多个，多个以新行隔开)</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-info">
+            <div class="panel-heading"><h4>用户行为</h4></div>
+            <div class="panel-body">
+                <div>
+                    <label class="col-sm-2 control-label">使用情况:</label>
+                    <span class="checkbox-inline">
+                        <input type="checkbox" id="register" name="register" value="1">注册</input>
+                    </span>
+                    <span class="checkbox-inline">
+                        <input type="checkbox" id="login" name="login" value="1">登录</input>
+                    </span>
+                </div>
+                <br></br>
+                <div>
+                    <label class="col-sm-2 control-label">兑换方式:</label>
+                    <span class="checkbox-inline">
+                        <input type="checkbox" id="credit" name="credit" value="1">积分</input>
+                    </span>
+                    <span class="checkbox-inline">
+                        <input type="checkbox" id="rmb" name="rmb" value="1">￥人民币</input>
+                    </span>
+                </div>
+                <br></br>
+                <div>
+                    <label class="col-sm-2 control-label">操作系统:</label>
+                    <span class="checkbox-inline">
+                        <input type="checkbox" id="android" name="android" value="1">android</input>
+                    </span>
+                    <span class="checkbox-inline">
+                        <input type="checkbox" id="ios" name="ios" value="1">iOS</input>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button id="submit" type="button" class="btn btn-default" onclick="queryId();">提交</button>
+        </div>
+    </div>
+</div>
+<hr></hr>
+<div id="result" class="container">
+</div>
+<div id="footer"></div>
+</body>
+</html>
