@@ -45,15 +45,15 @@
                             <tr ng-repeat="material in section.materials" ng-attr-id="material_id">
                                     <td ng-bind="material[0].sequence">1</td>
                                     <td ng-bind="material[0].name">304不锈钢过滤器</td>
-                                    <td ng-bind="material[0].spec">Ф1800</td>
+                                    <td ng-init="material[0].selected_spec = material[0].spec" ng-model="material[0].selected_spec" ng-bind="material[0].selected_spec">Ф1800</td>
                                     <!-- brand -->
                                     <td ng-if="material.length == 1" ng-bind="material[0].brand">广州潮流</td>
-                                    <td ng-if="material.length != 1"><select ng-init="selected = material[0]" ng-model="selected" ng-options="item.brand for item in material" ng-show="changeSelect(item)"></select></td>
+                                    <td ng-if="material.length != 1"><select ng-init="material[0].selected_priority = 0" ng-model="material[0].selected_priority" ng-change="changeSelect(material)"><option ng-repeat="item in material" ng-value="{{item.priority}}">{{item.brand}}</option></select></td>
                                     <!-- end brand -->
                                     <td ng-bind="material[0].unit">台</td>
                                     <td><input type="text" ng-init="material[0].quantity=material[0].default_quantity" ng-model="material[0].quantity" ng-value="material[0].default_quantity"></td>
-                                    <td ng-bind="material[0].unit_price">40500</td>
-                                    <td ng-model="material[0].original_price" ng-init="material[0].original_price = material[0].unit_price * material[0].quantity" ng-bind="material[0].original_price = material[0].unit_price * material[0].quantity" ng-value="material[0].unit_price * material[0].quantity"></td>
+                                    <td ng-init="material[0].selected_unit_price = material[0].unit_price" ng-model="material[0].selected_unit_price" ng-bind="material[0].selected_unit_price">40500</td>
+                                    <td ng-model="material[0].original_price" ng-init="material[0].original_price = material[0].selected_unit_price * material[0].quantity" ng-bind="material[0].original_price = material[0].selected_unit_price * material[0].quantity" ng-value="material[0].selected_unit_price * material[0].quantity"></td>
                                     <td><input type="text" ng-model="material[0].discount" ng-init="material[0].discount = 1.0" ng-value="material[0].discount"></td>
                                     <td ng-model="material[0].final_price" ng-init="material[0].final_price = 0" ng-bind="material[0].final_price = material[0].original_price * material[0].discount"></td>
                                     <td><input type="text" ng-model="material[0].comments" ng-value="material[0].comments"></td>
@@ -74,8 +74,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <h5>{{ selected }}</h5>
-                    <h5>{{section}}</h5>
+                    <!--<h5>{{section}}</h5>-->
                 </div>
 
                 <span><h4>总价：</h4><h5 ng-model="plan.final_price" ng-init="0" ng-bind="plan.final_price = getPlanTotal()"></h5></span>

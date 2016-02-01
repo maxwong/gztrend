@@ -10,18 +10,24 @@ details.controller('detailsCtrl', function($scope) {
     $scope.plan = json;
     $scope.result = {};
 
-    $scope.changeSelect = function(item) {
-        console.log('changed!');
+    $scope.changeSelect = function(material) {
+        material[0].selected_spec = material[material[0].selected_priority].spec;
+
     };
 
     $scope.getSectionTotal = function(index) {
         var sectionTotal = 0;
         var section = $scope.plan.sections[index];
         for (var i = 0; i < section.materials.length; ++i) {
-            var material = section.materials[i];
-            if (material.is_show) {
-                sectionTotal += material.final_price;//material.unit_price * material.default_quantity * material.discount;
-            }
+            var material = section.materials[i], item = {};
+/*            if (material.length == 1) {
+                item = material[0];
+            } else {
+                item =  material[material[0].selected_priority];
+            }*/
+
+            sectionTotal += material[0].final_price;//material.unit_price * material.default_quantity * material.discount;
+
         }
 
         return sectionTotal;
