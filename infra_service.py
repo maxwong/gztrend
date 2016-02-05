@@ -1,6 +1,5 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-import json
 
 from dao_model import Plan, Section, SectionMaterial, Material, Base
 
@@ -141,6 +140,10 @@ class InfraService:
         result['errcode'] = 0
         result['msg'] = 'ok'
         return result
+
+    def export(self, order_id):
+
+        return
 
     def run(self):
         plan = session.query(Plan).one()

@@ -16,10 +16,10 @@
 <body>
 <div class="container">
     <div id="header"></div>
-    <div class="panel-group">
+    <div class="panel-group" ng-app="details" ng-controller="detailsCtrl" ng-model="plan_result">
         <div class="panel panel-info">
-            <div class="panel-heading"><h4>水处理系统</h4></div>
-            <div class="panel-body" ng-app="details" ng-controller="detailsCtrl" ng-model="plan_result">
+            <div class="panel-heading"><h4>{{plan.name}}</h4></div>
+            <div class="panel-body" >
 
                 <div ng-repeat="section in plan.sections" ng-attr-id="section.section_id">
                     <label ng-attr-id="section.section_id" ng-bind="section.section_id + '&nbsp;&nbsp;'"></label>
@@ -75,6 +75,7 @@
                         </tbody>
                     </table>
                     <!--<h5>{{section}}</h5>-->
+                    <!--<h5>{{plan}}</h5>-->
                 </div>
 
                 <span><h4>总价：</h4><h5 ng-model="plan.final_price" ng-init="0" ng-bind="plan.final_price = getPlanTotal()"></h5></span>
@@ -83,7 +84,7 @@
 
 
         <div class="panel-footer">
-            <button id="submit" type="button" class="btn btn-default" onclick="queryId();">提交</button>
+            <button id="submit" type="button" class="btn btn-default" ng-click="submit()">提交</button>
         </div>
     </div>
 </div>

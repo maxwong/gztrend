@@ -1,6 +1,8 @@
-from flask import Flask, request, send_from_directory
-from infra_service import InfraService
 import json
+
+from flask import Flask, request, send_from_directory
+
+from infra_service import InfraService
 
 app = Flask(__name__, static_url_path='')
 
@@ -38,14 +40,16 @@ def get_details(plan_id):
     return json.dumps(result, ensure_ascii=False)
 
 
-@app.route('/quotation', methods=['GET', 'POST'])
+@app.route('/save', methods=['GET', 'POST'])
 def save_quotation():
-    return 'quotation'
+    return 'save'
 
 
 @app.route('/export', methods=['GET', 'POST'])
 def export():
-    return '哈哈'
+    infra_service = InfraService()
+
+    return
 
 
 @app.route('/')
