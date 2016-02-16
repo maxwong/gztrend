@@ -2,8 +2,8 @@
 -- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jan 10, 2016 at 10:24 AM
+-- Host: 127.0.0.1
+-- Generation Time: Feb 16, 2016 at 02:45 PM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -30,7 +30,7 @@ CREATE TABLE `materials` (
   `material_id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(160) COLLATE utf8mb4_unicode_ci NOT NULL,
   `type` varchar(160) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `specs` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `spec` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `brand` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `unit` varchar(80) COLLATE utf8mb4_unicode_ci NOT NULL,
   `unit_price` float(9,2) NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE `materials` (
 -- Dumping data for table `materials`
 --
 
-INSERT INTO `materials` (`material_id`, `name`, `type`, `specs`, `brand`, `unit`, `unit_price`, `comments`, `status`) VALUES
+INSERT INTO `materials` (`material_id`, `name`, `type`, `spec`, `brand`, `unit`, `unit_price`, `comments`, `status`) VALUES
 (1, '304不锈钢过滤器(2400)', NULL, 'Ф2400', '广州潮流', '台', 69500.00, NULL, 1),
 (2, '水泵', NULL, '15kw', '上海或广东', '台', 9600.00, NULL, 1),
 (3, '水泵', '', 'KQW125/125-15/2', '凯泉（上海）', '台', 9600.00, '15kw', 1),
@@ -118,6 +118,18 @@ INSERT INTO `materials` (`material_id`, `name`, `type`, `specs`, `brand`, `unit`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `order_id` bigint(20) UNSIGNED NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `plans`
 --
 
@@ -136,7 +148,8 @@ CREATE TABLE `plans` (
 --
 
 INSERT INTO `plans` (`plan_id`, `name`, `section_relation`, `description`, `footer`, `comments`, `status`) VALUES
-(1, '水处理设备', 'pick_one', '设备概况：\r\n1、304不锈钢过滤器（B2400，B1800，B1600）；\r\n2、304不锈钢毛发收集器；\r\n3、美国米顿罗消毒投药泵；\r\n4、水处理是我公司的起家本业，我公司也是全国第一家专业水处理注册公司，已有二十几年行业经验，过滤器设备是公司专利技术产品，专业的品质和服务足以保证水质达到并优于《人工游泳池水质卫生标准》的检验要求。', '小计（不含机房外的管道、阀门）', '', 1);
+(1, '水处理设备', 'pick_one', '设备概况：\r\n1、304不锈钢过滤器（B2400，B1800，B1600）；\r\n2、304不锈钢毛发收集器；\r\n3、美国米顿罗消毒投药泵；\r\n4、水处理是我公司的起家本业，我公司也是全国第一家专业水处理注册公司，已有二十几年行业经验，过滤器设备是公司专利技术产品，专业的品质和服务足以保证水质达到并优于《人工游泳池水质卫生标准》的检验要求。', '小计（不含机房外的管道、阀门）', '', 1),
+(2, '水处理设备-1', 'pick_one', '设备概况：\r\n1、304不锈钢过滤器（B2400，B1800，B1600）；\r\n2、304不锈钢毛发收集器；\r\n3、美国米顿罗消毒投药泵；\r\n4、水处理是我公司的起家本业，我公司也是全国第一家专业水处理注册公司，已有二十几年行业经验，过滤器设备是公司专利技术产品，专业的品质和服务足以保证水质达到并优于《人工游泳池水质卫生标准》的检验要求。', '小计（不含机房外的管道、阀门）', '', 1);
 
 -- --------------------------------------------------------
 
@@ -160,11 +173,11 @@ CREATE TABLE `sections` (
 
 INSERT INTO `sections` (`section_id`, `name`, `description`, `plan_id`, `layer`, `sequence`, `status`) VALUES
 (1, '_池（Ф2400，15kw）', '水面积_平方米，水深_米，体积_立方米，循环周期约_H', 1, 1, 1, 1),
-(2, '_池（Ф1800，7.5kw，1个泵）', '水面积_平方米，水深_米，体积_立方米，循环周期约_H', 1, 1, 1, 1),
-(3, '_池（Ф1800，7.5kw，2个泵）', '水面积_平方米，水深_米，体积_立方米，循环周期约_H', 1, 1, 1, 1),
-(4, '_池（Ф1600，5.5kw）', '水面积_平方米，水深_米，体积_立方米，循环周期约_H', 1, 1, 1, 1),
-(5, '_落水池（Ф1200，4.0kw）', '水面积_平方米，水深_米，体积_立方米，循环周期约_H', 1, 1, 1, 1),
-(6, '_落水池（Ф1000，3.0kw）', '水面积_平方米，水深_米，体积_立方米，循环周期约_H', 1, 1, 1, 1);
+(2, '_池（Ф1800，7.5kw，1个泵）', '水面积_平方米，水深_米，体积_立方米，循环周期约_H', 1, 1, 2, 1),
+(3, '_池（Ф1800，7.5kw，2个泵）', '水面积_平方米，水深_米，体积_立方米，循环周期约_H', 1, 1, 3, 1),
+(4, '_池（Ф1600，5.5kw）', '水面积_平方米，水深_米，体积_立方米，循环周期约_H', 1, 1, 4, 1),
+(5, '_落水池（Ф1200，4.0kw）', '水面积_平方米，水深_米，体积_立方米，循环周期约_H', 1, 1, 5, 1),
+(6, '_落水池（Ф1000，3.0kw）', '水面积_平方米，水深_米，体积_立方米，循环周期约_H', 1, 1, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -342,6 +355,12 @@ ALTER TABLE `materials`
   ADD KEY `type` (`type`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD UNIQUE KEY `order` (`order_id`);
+
+--
 -- Indexes for table `plans`
 --
 ALTER TABLE `plans`
@@ -372,10 +391,15 @@ ALTER TABLE `section_materials`
 ALTER TABLE `materials`
   MODIFY `material_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 --
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `order_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `plans`
 --
 ALTER TABLE `plans`
-  MODIFY `plan_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `plan_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `sections`
 --
