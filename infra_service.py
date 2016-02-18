@@ -1,6 +1,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+import xlwt
+import xlrd
 import openpyxl
 
 from dao_model import Plan, Section, SectionMaterial, Material, Base
@@ -143,8 +145,8 @@ class InfraService:
         result['msg'] = 'ok'
         return result
 
-    def export(self, order_id):
-        file = r'/home/maxwong/temp/test.xlsx'
+    def export_xlsx(self, order_id):
+        file = r'/Users/maxwong/temp/test.xlsx'
 
         book = openpyxl.Workbook()
 
@@ -164,6 +166,22 @@ class InfraService:
                 cell.value = d
 
         book.save(file)
+
+
+    def export_xls(self, order_id):
+        file = r'/Users/maxwong/temp/test.xls'
+
+        book = xlwt.Workbook()
+        sheet = book.add_sheet('Test')
+
+        vars = ['x', 'y', 'z']
+
+        sheet.write(0, 0, '0-0')
+        sheet.write(1, 1, '1-1')
+
+        book.save(file)
+
+
 
     def run(self):
         plan = session.query(Plan).one()

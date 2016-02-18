@@ -49,7 +49,7 @@ def save_quotation():
 def export():
     infra_service = InfraService()
 
-    infra_service.export(1)
+    infra_service.export_xls(1)
 
     return 'done'
 
