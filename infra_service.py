@@ -1,6 +1,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+import openpyxl
+
 from dao_model import Plan, Section, SectionMaterial, Material, Base
 
 db_engine = create_engine('mysql+pymysql://root:123@localhost:3306/gztrend?charset=utf8mb4', encoding='utf8', echo=True)
@@ -142,9 +144,29 @@ class InfraService:
         return result
 
     def export(self, order_id):
+        file = r'/home/maxwong/temp/test.xlsx'
 
-        return
+        book = openpyxl.Workbook()
+
+        sheet = book.get_active_sheet()
+        sheet.title = 'Test'
+
+        cell_A1 = sheet.cell('A1')
+        cell_A1.value = 'a1'
+
+        cell_B1 = sheet.cell(row=1, column=2)
+        cell_B1.value = 'b1'
+
+        data = (1.1, 200, 'abc')
+        rng = sheet.range('A5:C5')
+        for r in rng:
+            for cell, d in zip(r, data):
+                cell.value = d
+
+        book.save(file)
 
     def run(self):
         plan = session.query(Plan).one()
         return plan
+
+

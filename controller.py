@@ -49,7 +49,9 @@ def save_quotation():
 def export():
     infra_service = InfraService()
 
-    return
+    infra_service.export(1)
+
+    return 'done'
 
 
 @app.route('/')
