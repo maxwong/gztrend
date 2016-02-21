@@ -3,6 +3,7 @@ import json
 from flask import Flask, request, send_from_directory
 
 from infra_service import InfraService
+from exporter import Exporter
 
 app = Flask(__name__, static_url_path='')
 
@@ -47,9 +48,9 @@ def save_quotation():
 
 @app.route('/export', methods=['GET', 'POST'])
 def export():
-    infra_service = InfraService()
+    exporter = Exporter()
 
-    infra_service.export_detail(1)
+    exporter.export_detail(1)
 
     return 'done'
 
