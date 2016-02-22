@@ -1,5 +1,5 @@
 from flask import Flask
-from sqlalchemy import Column, String, Integer, DateTime, BigInteger, Boolean, Float, func
+from sqlalchemy import Column, String, Integer, DateTime, BigInteger, Boolean, Float, func, Text
 from sqlalchemy.orm import relationship, backref, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -51,3 +51,9 @@ class SectionMaterial(Base):
     priority = Column(Integer, nullable=False)
     is_fixed_amount = Column(Boolean, nullable=False, default=True)
     status = Column(Boolean, nullable=False, default=True)
+
+class Order(Base):
+    __tablename__ = 'orders'
+    order_id = Column(BigInteger, primary_key=True)
+    content = Column(Text, nullable=False)
+    created_at = Column(DateTime, nullable=False, default=func.now())

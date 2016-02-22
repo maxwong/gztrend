@@ -43,9 +43,12 @@ def get_details(plan_id):
 
 @app.route('/save_order', methods=['GET', 'POST'])
 def save_order():
+    infra_service = InfraService()
     order = request.args.get('order')
-    a = 1 + 1
-    return 'save'
+
+    order_id = infra_service.save_order(order)
+
+    return order_id.__str__()
 
 
 @app.route('/export', methods=['GET', 'POST'])

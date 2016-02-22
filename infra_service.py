@@ -2,7 +2,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from dao_model import Plan, Section, SectionMaterial, Material, Base
+from dao_model import Plan, Section, SectionMaterial, Material, Base, Order
 
 from exporter import Exporter
 
@@ -143,6 +143,16 @@ class InfraService:
         result['errcode'] = 0
         result['msg'] = 'ok'
         return result
+
+    def save_order(self, content):
+        order = Order()
+        order.content = content
+
+        session.add(order)
+
+        session.commit()
+
+        return order.order_id
 
     def export_detail(self, order_id):
         exporter = Exporter()
