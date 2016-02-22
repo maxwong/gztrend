@@ -2,13 +2,9 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-import json
-
-import xlwt
-import xlrd
-import openpyxl
-
 from dao_model import Plan, Section, SectionMaterial, Material, Base
+
+from exporter import Exporter
 
 db_engine = create_engine('mysql+pymysql://root:123@localhost:3306/gztrend?charset=utf8mb4', encoding='utf8', echo=True)
 Base.metadata.bind = db_engine
@@ -148,7 +144,9 @@ class InfraService:
         result['msg'] = 'ok'
         return result
 
-
+    def export_detail(self, order_id):
+        exporter = Exporter()
+        exporter.export_detail(order_id)
 
     def export_summary(self, order_id):
         return

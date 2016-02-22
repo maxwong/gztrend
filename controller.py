@@ -1,6 +1,6 @@
 import json
 
-from flask import Flask, request, send_from_directory
+from flask import Flask, request, send_from_directory, make_response, send_file
 
 from infra_service import InfraService
 from exporter import Exporter
@@ -52,6 +52,7 @@ def export():
 
     exporter.export_detail(1)
 
+#    return send_file('/home/maxwong/temp/test.xls', as_attachment=True)
     return 'done'
 
 
