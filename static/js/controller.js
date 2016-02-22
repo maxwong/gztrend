@@ -3,6 +3,7 @@
  */
 
 var details = angular.module('details', []);
+var server = 'http://localhost:5000';
 
 details.controller('detailsCtrl', function ($scope) {
     var json = $.parseJSON(dataString.replace(/\r/g, '\\\\r').replace(/\n/g, '\\\\n'));
@@ -92,7 +93,19 @@ details.controller('detailsCtrl', function ($scope) {
             }
         }
 
-        var a = 1 + 1;
+        $.ajax({
+            url: server + '/save_order',
+            datatype: 'jsonp',
+            data: {"order": JSON.stringify(result)},
+            jsonp: 'callback',
+            jsonpCallback: 'save_order',
+            success: function(data) {
+                alert('success');
+            },
+            complete: function(data) {
+                alert('complete');
+            }
+        });
     };
 
 });

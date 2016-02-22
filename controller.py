@@ -1,6 +1,6 @@
 import json
 
-from flask import Flask, request, send_from_directory, make_response, send_file
+from flask import Flask, request, send_from_directory, send_file
 
 from infra_service import InfraService
 from exporter import Exporter
@@ -41,19 +41,22 @@ def get_details(plan_id):
     return json.dumps(result, ensure_ascii=False)
 
 
-@app.route('/save', methods=['GET', 'POST'])
-def save_quotation():
+@app.route('/save_order', methods=['GET', 'POST'])
+def save_order():
+    order = request.args.get('order')
+    a = 1 + 1
     return 'save'
 
 
 @app.route('/export', methods=['GET', 'POST'])
 def export():
+    order_id = request.args.get('order_id')
     exporter = Exporter()
 
-    exporter.export_detail(1)
+    exporter.export_detail(order_id)
 
-#    return send_file('/home/maxwong/temp/test.xls', as_attachment=True)
-    return 'done'
+    return send_file('/home/maxwong/temp/test.xls', as_attachment=True)
+#    return 'done'
 
 
 @app.route('/')
