@@ -11,6 +11,7 @@ Base.metadata.bind = db_engine
 db_session = sessionmaker(bind=db_engine)
 session = db_session()
 
+
 class InfraService:
 
     def get_plan_summary(self):

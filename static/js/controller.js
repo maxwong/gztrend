@@ -6,6 +6,7 @@ var details = angular.module('details', []);
 var server = 'http://localhost:5000';
 
 details.controller('detailsCtrl', function ($scope) {
+    $.getScript("js/conf.js");
     var json = $.parseJSON(dataString.replace(/\r/g, '\\\\r').replace(/\n/g, '\\\\n'));
 
     $scope.plan = json;

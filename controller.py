@@ -15,7 +15,7 @@ def get_plan():
     return json.dumps(summary, ensure_ascii=False)
 
 
-@app.route('/plan/<plan_id>/section', methods=['GET', 'POST'])
+@app.route('/plan/<plan_id>/sections', methods=['GET', 'POST'])
 def get_sections(plan_id):
     infra_service = InfraService()
 
@@ -64,7 +64,7 @@ def export():
 
 @app.route('/')
 def hello_world():
-    return app.send_static_file('section_selection.html')
+    return app.send_static_file('index.html')
 
 
 @app.route('/<path:path>')
