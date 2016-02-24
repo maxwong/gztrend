@@ -31,5 +31,9 @@ function getAvailablePlans() {
 $(document).ready(function () {
     $.getScript("js/conf.js", function() {
         getAvailablePlans();
+
+        $('#export').click(function() {
+            location.href = server + '/export.html';
+        });
     });
 });

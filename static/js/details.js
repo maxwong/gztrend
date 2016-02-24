@@ -158,7 +158,7 @@ details.controller('detailsCtrl', function ($scope, detailsService) {
                 var json = JSON.parse(data);
                 var order_id = json.order_id;
 
-                location.href = server + '/export?order_id=' + order_id;
+                location.href = server + '/export.html?order_id=' + order_id;
             },
             failed: function(data) {
                 alert('失败了，请联系管理员哦');
