@@ -48,17 +48,18 @@ def save_order():
 
     order_id = infra_service.save_order(order)
 
-    return order_id.__str__()
+    result = {"order_id": order_id}
+    return json.dumps(result, ensure_ascii=False)
 
 
 @app.route('/export', methods=['GET', 'POST'])
 def export():
     order_id = request.args.get('order_id')
-    exporter = Exporter()
+    infra_service = InfraService()
 
-    exporter.export_detail(order_id)
+    output = infra_service.export_detail(order_id)
 
-    return send_file('/home/maxwong/temp/test.xls', as_attachment=True)
+    return send_file(output, as_attachment=True)
 #    return 'done'
 
 

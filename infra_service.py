@@ -156,8 +156,12 @@ class InfraService:
         return order.order_id
 
     def export_detail(self, order_id):
+        order = session.query(Order).filter(Order.order_id == order_id).one()
+
         exporter = Exporter()
-        exporter.export_detail(order_id)
+        output = exporter.export_detail(order.content, order.order_id.__str__() + '_内部版')
+
+        return output
 
     def export_summary(self, order_id):
         return

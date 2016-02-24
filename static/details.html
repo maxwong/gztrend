@@ -6,7 +6,8 @@
 <script type="text/javascript" src="lib/js/jquery-1.12.0.min.js"></script>
 <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="lib/js/angular.min.js"></script>
-<script type="text/javascript" src="js/controller.js"></script>
+<script type="text/javascript" src="js/conf.js"></script>
+<script type="text/javascript" src="js/details.js"></script>
 <link rel="stylesheet" href="lib/css/bootstrap.min.css">
 <link rel="stylesheet" href="lib/css/bootstrap-theme.min.css">
 
@@ -16,7 +17,7 @@
 <body>
 <div class="container">
     <div id="header"></div>
-    <div class="panel-group" ng-app="details" ng-controller="detailsCtrl" ng-model="plan_result">
+    <div class="panel-group" ng-app="details" ng-controller="detailsCtrl" ng-model="plan_result" ng-show="plan.name">
         <div class="panel panel-info">
             <div class="panel-heading"><h4>{{plan.name}}</h4></div>
             <div class="panel-body">

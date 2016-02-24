@@ -8,6 +8,7 @@ class Exporter:
 
     offset_row = 0
     offset_col = 0
+    output_dir = r'/home/maxwong/temp/'
 
     def __init__(self):
         self.default_max_col = 11
@@ -29,17 +30,16 @@ class Exporter:
         align_centre_with_wrap = 'align: horiz centre, wrap on;'
         align_right_with_wrap = 'align: horiz right, wrap on;'
 
-
         self.style_material_header = xlwt.easyxf(align_centre_with_wrap + material_borders)
 
         self.style_material_left = xlwt.easyxf(align_left_with_wrap + material_borders)
         self.style_material_centre = xlwt.easyxf(align_centre_with_wrap + material_borders)
         self.style_material_right = xlwt.easyxf(align_right_with_wrap + material_borders)
 
-    def export_detail(self, order_id):
-        file = r'/home/maxwong/temp/test.xls'
+    def export_detail(self, content, file_name):
+        file = self.output_dir + file_name + '.xls'
 
-        order = json.JSONDecoder(encoding='utf-8').decode(self.example)
+        order = json.JSONDecoder(encoding='utf-8').decode(content)
 
         book = xlwt.Workbook(encoding='utf-8')
         sheet = book.add_sheet('报价')
@@ -127,7 +127,7 @@ class Exporter:
 
         book.save(file)
 
-        return book
+        return file
 
     def __write_material_header(self, sheet, offset_row, offset_col):
         cur_row = offset_row
