@@ -4,6 +4,10 @@
 
 var details = angular.module('details', []);
 
+function roundTo2(decimal) {
+    return Math.round(decimal * 100) / 100;
+}
+
 function waitForData(data) {
     if (typeof data == 'undefined') {
         setTimeout(function () {
@@ -75,7 +79,7 @@ details.controller('detailsCtrl', function ($scope, detailsService) {
              item =  material[material[0].selected_priority];
              }*/
 
-            sectionTotal += material[0].final_price;//material.unit_price * material.default_quantity * material.discount;
+            sectionTotal += roundTo2(material[0].final_price);//material.unit_price * material.default_quantity * material.discount;
 
         }
 
@@ -138,9 +142,9 @@ details.controller('detailsCtrl', function ($scope, detailsService) {
                 result_material.brand = item.brand;
                 result_material.spec = item.selected_spec;
                 result_material.comments = item.comments;
-                result_material.original_price = item.original_price;
+                result_material.original_price = item.original_price.toFixed(2);
                 result_material.discount = item.discount;
-                result_material.final_price = item.final_price;
+                result_material.final_price = item.final_price.toFixed(2);
             }
         }
 
