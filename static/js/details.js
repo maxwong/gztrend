@@ -148,7 +148,7 @@ details.controller('detailsCtrl', function ($scope, detailsService) {
             }
         }
 
-        $.ajax({
+/*        $.ajax({
             url: server + '/save_order',
             datatype: 'jsonp',
             data: {"order": JSON.stringify(result)},
@@ -163,7 +163,13 @@ details.controller('detailsCtrl', function ($scope, detailsService) {
             failed: function(data) {
                 alert('失败了，请联系管理员哦');
             }
-        });
+        });*/
+
+        param = encodeURI(JSON.stringify(result));
+
+        $('<form action="save_order" method="POST">' +
+            '<input type="hidden" name="order" value="' + param + '">' +
+            '</form>').submit();
     };
 
 });

@@ -1,6 +1,4 @@
-from flask import Flask
 from sqlalchemy import Column, String, Integer, DateTime, BigInteger, Boolean, Float, func, Text
-from sqlalchemy.orm import relationship, backref, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()

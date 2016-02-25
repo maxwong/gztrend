@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
 import json
+import urllib
 
-from flask import Flask, request, send_from_directory, send_file
-
+from flask import Flask, request, send_from_directory, send_file, redirect, url_for
 from infra_service import InfraService
 from exporter import Exporter
 
@@ -44,12 +45,15 @@ def get_details(plan_id):
 @app.route('/save_order', methods=['GET', 'POST'])
 def save_order():
     infra_service = InfraService()
-    order = request.args.get('order')
+    raw_order = request.form['order']
 
-    order_id = infra_service.save_order(order)
+    decoded_order = urllib.unquote(raw_order.__str__())
 
-    result = {"order_id": order_id}
-    return json.dumps(result, ensure_ascii=False)
+    order_id = infra_service.save_order(decoded_order)
+
+    host = request.args.get('request_uri')
+
+    return redirect(request.host_url + 'export.html?order_id=' + order_id.__str__(), code=302)
 
 
 @app.route('/export', methods=['GET', 'POST'])

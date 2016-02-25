@@ -1,18 +1,24 @@
 # -*- coding: utf-8 -*-
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, pool
 from sqlalchemy.orm import sessionmaker
 
 from dao_model import Plan, Section, SectionMaterial, Material, Base, Order
 
 from exporter import Exporter
 
-db_engine = create_engine('mysql+pymysql://root:123@localhost:3306/gztrend?charset=utf8mb4', encoding='utf8', echo=True)
+import logging
+
+db_engine = create_engine('mysql+pymysql://root:123@localhost:3306/gztrend?charset=utf8mb4', encoding='utf8', echo=True, pool_size=4)
 Base.metadata.bind = db_engine
 db_session = sessionmaker(bind=db_engine)
 session = db_session()
 
 
 class InfraService:
+
+    def __init__(self):
+        logging.basicConfig()
+        logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
 
     def get_plan_summary(self):
         plans = session.query(Plan).all()
