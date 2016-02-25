@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.5.4.1deb1.precise~ppa.1
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 16, 2016 at 02:45 PM
--- Server version: 5.7.9
--- PHP Version: 5.6.16
+-- Host: localhost
+-- Generation Time: 2016-02-25 12:20:23
+-- 服务器版本： 5.5.47-0ubuntu0.12.04.1
+-- PHP Version: 5.6.18-1+deb.sury.org~precise+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `materials`
+-- 表的结构 `materials`
 --
 
 CREATE TABLE `materials` (
@@ -39,7 +39,7 @@ CREATE TABLE `materials` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `materials`
+-- 转存表中的数据 `materials`
 --
 
 INSERT INTO `materials` (`material_id`, `name`, `type`, `spec`, `brand`, `unit`, `unit_price`, `comments`, `status`) VALUES
@@ -118,7 +118,7 @@ INSERT INTO `materials` (`material_id`, `name`, `type`, `spec`, `brand`, `unit`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orders`
+-- 表的结构 `orders`
 --
 
 CREATE TABLE `orders` (
@@ -130,7 +130,7 @@ CREATE TABLE `orders` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `plans`
+-- 表的结构 `plans`
 --
 
 CREATE TABLE `plans` (
@@ -144,17 +144,17 @@ CREATE TABLE `plans` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `plans`
+-- 转存表中的数据 `plans`
 --
 
 INSERT INTO `plans` (`plan_id`, `name`, `section_relation`, `description`, `footer`, `comments`, `status`) VALUES
-(1, '水处理设备', 'pick_one', '设备概况：\r\n1、304不锈钢过滤器（B2400，B1800，B1600）；\r\n2、304不锈钢毛发收集器；\r\n3、美国米顿罗消毒投药泵；\r\n4、水处理是我公司的起家本业，我公司也是全国第一家专业水处理注册公司，已有二十几年行业经验，过滤器设备是公司专利技术产品，专业的品质和服务足以保证水质达到并优于《人工游泳池水质卫生标准》的检验要求。', '小计（不含机房外的管道、阀门）', '', 1),
-(2, '水处理设备-1', 'pick_one', '设备概况：\r\n1、304不锈钢过滤器（B2400，B1800，B1600）；\r\n2、304不锈钢毛发收集器；\r\n3、美国米顿罗消毒投药泵；\r\n4、水处理是我公司的起家本业，我公司也是全国第一家专业水处理注册公司，已有二十几年行业经验，过滤器设备是公司专利技术产品，专业的品质和服务足以保证水质达到并优于《人工游泳池水质卫生标准》的检验要求。', '小计（不含机房外的管道、阀门）', '', 1);
+(1, '水处理设备', 'pick_one', '设备概况：\n1、304不锈钢过滤器（B2400，B1800，B1600）；\\r\\n2、304不锈钢毛发收集器；\\r\\n3、美国米顿罗消毒投药泵；\\r\\n4、水处理是我公司的起家本业，我公司也是全国第一家专业水处理注册公司，已有二十几年行业经验，过滤器设备是公司专利技术产品，专业的品质和服务足以保证水质达到并优于《人工游泳池水质卫生标准》的检验要求。', '（不含机房外的管道、阀门）', '', 1),
+(2, '水处理设备-1', 'pick_one', '设备概况：\n1、304不锈钢过滤器（B2400，B1800，B1600）；\n2、304不锈钢毛发收集器；\n3、美国米顿罗消毒投药泵；\n4、水处理是我公司的起家本业，我公司也是全国第一家专业水处理注册公司，已有二十几年行业经验，过滤器设备是公司专利技术产品，专业的品质和服务足以保证水质达到并优于《人工游泳池水质卫生标准》的检验要求。', '（不含机房外的管道、阀门）', '', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sections`
+-- 表的结构 `sections`
 --
 
 CREATE TABLE `sections` (
@@ -168,7 +168,7 @@ CREATE TABLE `sections` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `sections`
+-- 转存表中的数据 `sections`
 --
 
 INSERT INTO `sections` (`section_id`, `name`, `description`, `plan_id`, `layer`, `sequence`, `status`) VALUES
@@ -182,7 +182,7 @@ INSERT INTO `sections` (`section_id`, `name`, `description`, `plan_id`, `layer`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `section_materials`
+-- 表的结构 `section_materials`
 --
 
 CREATE TABLE `section_materials` (
@@ -197,7 +197,7 @@ CREATE TABLE `section_materials` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `section_materials`
+-- 转存表中的数据 `section_materials`
 --
 
 INSERT INTO `section_materials` (`section_material_id`, `section_id`, `material_id`, `sequence`, `default_quantity`, `priority`, `is_fixed_amount`, `status`) VALUES
@@ -382,31 +382,31 @@ ALTER TABLE `section_materials`
   ADD KEY `sequence` (`sequence`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- 在导出的表使用AUTO_INCREMENT
 --
 
 --
--- AUTO_INCREMENT for table `materials`
+-- 使用表AUTO_INCREMENT `materials`
 --
 ALTER TABLE `materials`
   MODIFY `material_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 --
--- AUTO_INCREMENT for table `orders`
+-- 使用表AUTO_INCREMENT `orders`
 --
 ALTER TABLE `orders`
   MODIFY `order_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `plans`
+-- 使用表AUTO_INCREMENT `plans`
 --
 ALTER TABLE `plans`
   MODIFY `plan_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `sections`
+-- 使用表AUTO_INCREMENT `sections`
 --
 ALTER TABLE `sections`
   MODIFY `section_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT for table `section_materials`
+-- 使用表AUTO_INCREMENT `section_materials`
 --
 ALTER TABLE `section_materials`
   MODIFY `section_material_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
