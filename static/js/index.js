@@ -7,11 +7,7 @@ function getAvailablePlans() {
     var planList = $('#plan_list'), clickUrl = "'" + server + "/section_selection.html?plan_id=$plan_id'";
     var buttonTemplate = '<button type="button" class="btn btn-primary" onclick="location.href=' + clickUrl + '">$name</button>';
     $.ajax({
-            url: server + '/plan',
-            datatype: 'jsonp',
-            data: {},
-            jsonp: 'callback',
-            jsonpCallback: 'plan',
+            url: '/plan',
             success: function(data) {
                 var plan = JSON.parse(data);
 

@@ -13,11 +13,7 @@ function getAvailableSections() {
     var buttonTemplate = '<label class="btn btn-default"><input type="checkbox" value="$section_id">$name</label>';
 
     $.ajax({
-            url: server + '/plan/' + planId + '/sections',
-            datatype: 'jsonp',
-            data: {},
-            jsonp: 'callback',
-            jsonpCallback: 'sections',
+            url: '/plan/' + planId + '/sections',
             success: function(data) {
                 var planSummary = JSON.parse(data);
                 $('#heading').html('<h4>' + planSummary.name + '</h4>');
