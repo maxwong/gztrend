@@ -144,28 +144,24 @@ details.controller('detailsCtrl', function ($scope, detailsService) {
             }
         }
 
-/*        $.ajax({
+
+        param = encodeURI(JSON.stringify(result));
+
+
+        $.ajax({
             url: server + '/save_order',
-            datatype: 'jsonp',
-            data: {"order": JSON.stringify(result)},
-            jsonp: 'callback',
-            jsonpCallback: 'save_order',
+            method: 'post',
+            data: {'order': param},
             success: function(data) {
                 var json = JSON.parse(data);
-                var order_id = json.order_id;
+                var url = json.url;
 
-                location.href = server + '/export.html?order_id=' + order_id;
+                location.href = url;
             },
             failed: function(data) {
                 alert('失败了，请联系管理员哦');
             }
-        });*/
-
-        param = encodeURI(JSON.stringify(result));
-
-        $('<form action="save_order" method="POST">' +
-            '<input type="hidden" name="order" value="' + param + '">' +
-            '</form>').submit();
+        });
     };
 
 });

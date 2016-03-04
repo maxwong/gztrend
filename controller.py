@@ -53,7 +53,10 @@ def save_order():
 
     host = request.args.get('request_uri')
 
-    return redirect(request.host_url + 'export.html?order_id=' + order_id.__str__(), code=302)
+    result = dict()
+
+    result['url'] = request.host_url + 'export.html?order_id=' + order_id.__str__()
+    return json.dumps(result, ensure_ascii=False)
 
 
 @app.route('/export', methods=['GET', 'POST'])

@@ -11,7 +11,7 @@ import logging
 db_engine = create_engine('mysql+pymysql://root:123@localhost:3306/gztrend?charset=utf8mb4', encoding='utf8', echo=True, pool_size=4)
 Base.metadata.bind = db_engine
 db_session = sessionmaker(bind=db_engine)
-session = db_session()
+
 
 
 class InfraService:
@@ -21,6 +21,7 @@ class InfraService:
         logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
 
     def get_plan_summary(self):
+        session = db_session()
         plans = session.query(Plan).all()
 
         result = []
@@ -33,6 +34,7 @@ class InfraService:
         return result
 
     def get_sections(self, plan_id):
+        session = db_session()
         result = dict()
 
         if plan_id is None:
@@ -61,6 +63,7 @@ class InfraService:
         return result
 
     def get_details(self, plan_id, section_ids):
+        session = db_session()
         result = dict()
 
         if plan_id is None:
@@ -152,6 +155,7 @@ class InfraService:
         return result
 
     def save_order(self, content):
+        session = db_session()
         order = Order()
         order.content = content
 
@@ -162,6 +166,7 @@ class InfraService:
         return order.order_id
 
     def export_detail(self, order_id):
+        session = db_session()
         order = session.query(Order).filter(Order.order_id == order_id).one()
 
         exporter = Exporter()
@@ -170,9 +175,11 @@ class InfraService:
         return output
 
     def export_summary(self, order_id):
+        session = db_session()
         return
 
     def run(self):
+        session = db_session()
         plan = session.query(Plan).one()
         return plan
 
