@@ -10,7 +10,7 @@ function getAvailableSections() {
         urlVars = getUrlVars();
 
     var planId= urlVars['plan_id'];
-    var buttonTemplate = '<label class="btn btn-default"><input type="checkbox" value="$section_id">$name</label>';
+    var buttonTemplate = '<div class="checkbox"><label><input type="checkbox" value="$section_id">$name</label></div>';
 
     $.ajax({
             url: '/plan/' + planId + '/sections',
@@ -18,7 +18,6 @@ function getAvailableSections() {
                 var planSummary = JSON.parse(data);
                 $('#heading').html('<h4>' + planSummary.name + '</h4>');
                 var sections = planSummary.sections;
-
 
                 for (var i = 0; i < sections.length; ++i) {
                     var sectionId = sections[i].section_id,
