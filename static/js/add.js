@@ -24,7 +24,7 @@ function add_section() {
                                     <th>备注</th> \
                                 </tr> \
                             </thead> \
-                            <tbody id="body_<n>"> \
+                            <tbody id="tbody_<n>"> \
                             </tbody> \
                         </table> \
                         <button id="add_material_<n>" type="button" class="btn btn-default" onclick="add_material(<n>)">新增物料</button> \
@@ -39,7 +39,19 @@ function add_section() {
 }
 
 function add_material(number) {
-    
+    var tbody = $("#tbody_" + number);
+
+    tbody.append('<tr> \
+                    <td><input type="text" size="3"></td> \
+                    <td><input type="text" size="16"></td> \
+                    <td><input type="text" size="20"></td> \
+                    <td><input type="text" size="10"></td> \
+                    <td><input type="text" size="4"></td> \
+                    <td><input type="text" size="3"></td> \
+                    <td><input type="text" size="10"></td> \
+                    <td><input type="text" size="20"></td> \
+        </tr>');
+
     console.log(number);
 }
 
