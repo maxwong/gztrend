@@ -9,6 +9,16 @@ from exporter import Exporter
 app = Flask(__name__, static_url_path='')
 
 
+@app.route('/add', methods=['POST'])
+def add_plan():
+    infra_service = InfraService()
+    data = urllib.unquote(request.form['data'])
+
+    result = infra_service.add_plan(data)
+
+    return 'hello'
+
+
 @app.route('/plan', methods=['GET'])
 def get_plan():
     infra_service = InfraService()

@@ -27,14 +27,24 @@
                 </div>
                 <div>
                     <div><b>设备概况</b></div>
-                    <textarea rows="6" cols="80" ng-model="plan.description" ng-value="plan.description"></textarea>
+                    <textarea rows="6" cols="80" id="plan_description" ng-model="plan.description" ng-value="plan.description"></textarea>
                 </div>
                 <hr/>
                 <div id="section">
-
                 </div>
                 <button id="add_section" type="button" class="btn btn-default" onclick="add_section()">新增模块</button>
 
+                <hr/>
+                <div>
+                    <div><b>脚注(显示在总价前)</b></div>
+                    <input type="text" id="plan_footer">
+                </div>
+
+                <div>
+                    <div><b>备注</b></div>
+                    <input type="text" id="plan_comments">
+                </div>
+            </div>
 
         <div class="panel-footer">
             <button id="submit" type="button" class="btn btn-default" onclick="submit()">提交</button>

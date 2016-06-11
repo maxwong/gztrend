@@ -27,7 +27,7 @@
                 </div>
                 <hr/>
                 <div ng-repeat="section in plan.sections" ng-attr-id="section.section_id">
-                    <label ng-attr-id="section.section_id" ng-bind="section.section_id + '&nbsp;&nbsp;'"></label>
+                    <label ng-bind="($index + 1) + '&nbsp;&nbsp;'"></label>
                     <input type="text" ng-model="section.name" ng-value="section.name">
                     <hr/>
                     <table class="table table-striped">
@@ -56,10 +56,10 @@
                                     <td ng-if="material.length != 1"><select ng-init="material[0].selected_priority = 0" ng-model="material[0].selected_priority" ng-change="changeSelect(material)"><option ng-repeat="item in material" ng-value="{{item.priority}}">{{item.brand}}</option></select></td>
                                     <!-- end brand -->
                                     <td ng-bind="material[0].unit">台</td>
-                                    <td><input type="text" ng-init="material[0].quantity=material[0].default_quantity" ng-model="material[0].quantity" ng-value="material[0].default_quantity"></td>
+                                    <td><input type="text" size="3" ng-init="material[0].quantity=material[0].default_quantity" ng-model="material[0].quantity" ng-value="material[0].default_quantity"></td>
                                     <td ng-init="material[0].selected_unit_price = material[0].unit_price" ng-model="material[0].selected_unit_price" ng-bind="material[0].selected_unit_price">40500</td>
                                     <td ng-model="material[0].original_price" ng-init="material[0].original_price = material[0].selected_unit_price * material[0].quantity" ng-bind="material[0].original_price = material[0].selected_unit_price * material[0].quantity | number:2" ng-value="material[0].selected_unit_price * material[0].quantity | number:2"></td>
-                                    <td><input type="text" ng-model="material[0].discount" ng-init="material[0].discount = 1.0" ng-value="material[0].discount"></td>
+                                    <td><input type="text" size="5" ng-model="material[0].discount" ng-init="material[0].discount = 1.0" ng-value="material[0].discount"></td>
                                     <td ng-model="material[0].final_price" ng-init="material[0].final_price = 0" ng-bind="material[0].final_price = material[0].original_price * material[0].discount | number:2"></td>
                                     <td><input type="text" ng-model="material[0].comments" ng-value="material[0].comments"></td>
                             </tr>
