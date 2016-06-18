@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>报价详情</title>
-<script type="text/javascript" src="lib/js/jquery-1.12.0.min.js"></script>
-<script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="lib/js/angular.min.js"></script>
-<script type="text/javascript" src="js/conf.js"></script>
-<script type="text/javascript" src="js/details.js"></script>
-<link rel="stylesheet" href="lib/css/bootstrap.min.css">
-<link rel="stylesheet" href="lib/css/bootstrap-theme.min.css">
+    <script type="text/javascript" src="lib/js/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="lib/js/angular.min.js"></script>
+    <script type="text/javascript" src="js/conf.js"></script>
+    <script type="text/javascript" src="js/details.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <link rel="stylesheet" href="lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/css/bootstrap-theme.min.css">
 
-<style>
-</style>
+    <style>
+    </style>
 </head>
 <body>
 <div class="container">
     <div id="header"></div>
     <div class="panel-group" ng-app="details" ng-controller="detailsCtrl" ng-model="plan_result" ng-show="plan.name">
         <div class="panel panel-info">
-            <div class="panel-heading"><h4>{{plan.name}}</h4></div>
+            <div class="panel-heading"><h4>{{ plan.name }}</h4></div>
             <div class="panel-body">
                 <div>
                     <div><b>设备概况</b></div>
@@ -32,58 +33,76 @@
                     <hr/>
                     <table class="table table-striped">
                         <thead>
-                            <tr>
-                                <th>序号</th>
-                                <th>项目明细</th>
-                                <th>规格型号</th>
-                                <th>品牌或产地</th>
-                                <th>单位</th>
-                                <th>数量</th>
-                                <th>单价(元)</th>
-                                <th>总价(元)</th>
-                                <th>折扣</th>
-                                <th>合价(元)</th>
-                                <th>备注</th>
-                            </tr>
+                        <tr>
+                            <th>序号</th>
+                            <th>项目明细</th>
+                            <th>规格型号</th>
+                            <th>品牌或产地</th>
+                            <th>单位</th>
+                            <th>数量</th>
+                            <th>单价(元)</th>
+                            <th>总价(元)</th>
+                            <th>折扣</th>
+                            <th>合价(元)</th>
+                            <th>备注</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="material in section.materials" ng-attr-id="material_id">
-                                    <td ng-bind="material[0].sequence">1</td>
-                                    <td ng-bind="material[0].name">304不锈钢过滤器</td>
-                                    <td ng-init="material[0].selected_spec = material[0].spec" ng-model="material[0].selected_spec" ng-bind="material[0].selected_spec">Ф1800</td>
-                                    <!-- brand -->
-                                    <td ng-if="material.length == 1" ng-bind="material[0].brand">广州潮流</td>
-                                    <td ng-if="material.length != 1"><select ng-init="material[0].selected_priority = 0" ng-model="material[0].selected_priority" ng-change="changeSelect(material)"><option ng-repeat="item in material" ng-value="{{item.priority}}">{{item.brand}}</option></select></td>
-                                    <!-- end brand -->
-                                    <td ng-bind="material[0].unit">台</td>
-                                    <td><input type="text" size="3" ng-init="material[0].quantity=material[0].default_quantity" ng-model="material[0].quantity" ng-value="material[0].default_quantity"></td>
-                                    <td ng-init="material[0].selected_unit_price = material[0].unit_price" ng-model="material[0].selected_unit_price" ng-bind="material[0].selected_unit_price">40500</td>
-                                    <td ng-model="material[0].original_price" ng-init="material[0].original_price = material[0].selected_unit_price * material[0].quantity" ng-bind="material[0].original_price = material[0].selected_unit_price * material[0].quantity | number:2" ng-value="material[0].selected_unit_price * material[0].quantity | number:2"></td>
-                                    <td><input type="text" size="5" ng-model="material[0].discount" ng-init="material[0].discount = 1.0" ng-value="material[0].discount"></td>
-                                    <td ng-model="material[0].final_price" ng-init="material[0].final_price = 0" ng-bind="material[0].final_price = material[0].original_price * material[0].discount | number:2"></td>
-                                    <td><input type="text" ng-model="material[0].comments" ng-value="material[0].comments"></td>
-                            </tr>
+                        <tr ng-repeat="material in section.materials" ng-attr-id="material_id">
+                            <td ng-bind="material[0].sequence">1</td>
+                            <td ng-bind="material[0].name">304不锈钢过滤器</td>
+                            <td ng-init="material[0].selected_spec = material[0].spec"
+                                ng-model="material[0].selected_spec" ng-bind="material[0].selected_spec">Ф1800
+                            </td>
+                            <!-- brand -->
+                            <td ng-if="material.length == 1" ng-bind="material[0].brand">广州潮流</td>
+                            <td ng-if="material.length != 1"><select ng-init="material[0].selected_priority = 0"
+                                                                     ng-model="material[0].selected_priority"
+                                                                     ng-change="changeSelect(material)">
+                                <option ng-repeat="item in material"
+                                        ng-value="{{ item.priority }}">{{ item.brand }}</option>
+                            </select></td>
+                            <!-- end brand -->
+                            <td ng-bind="material[0].unit">台</td>
+                            <td><input type="text" size="3" ng-init="material[0].quantity=material[0].default_quantity"
+                                       ng-model="material[0].quantity" ng-value="material[0].default_quantity"></td>
+                            <td ng-init="material[0].selected_unit_price = material[0].unit_price"
+                                ng-model="material[0].selected_unit_price" ng-bind="material[0].selected_unit_price">
+                                40500
+                            </td>
+                            <td ng-model="material[0].original_price"
+                                ng-init="material[0].original_price = material[0].selected_unit_price * material[0].quantity"
+                                ng-bind="material[0].original_price = material[0].selected_unit_price * material[0].quantity | number:2"
+                                ng-value="material[0].selected_unit_price * material[0].quantity | number:2"></td>
+                            <td><input type="text" size="5" ng-model="material[0].discount"
+                                       ng-init="material[0].discount = 1.0" ng-value="material[0].discount"></td>
+                            <td ng-model="material[0].final_price" ng-init="material[0].final_price = 0"
+                                ng-bind="material[0].final_price = material[0].original_price * material[0].discount | number:2"></td>
+                            <td><input type="text" ng-model="material[0].comments" ng-value="material[0].comments"></td>
+                        </tr>
 
-                            <tr>
-                                <td></td>
-                                <td>小计</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td ng-model="section.final_price" ng-init="section.final_price=0">{{ section.final_price = getSectionTotal($index) }}</td>
-                                <td></td>
-                            </tr>
+                        <tr>
+                            <td></td>
+                            <td>小计</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td ng-model="section.final_price" ng-init="section.final_price=0">
+                                {{ section.final_price = getSectionTotal($index) }}</td>
+                            <td></td>
+                        </tr>
                         </tbody>
                     </table>
                     <!--<h5>{{section}}</h5>-->
                     <!--<h5>{{plan}}</h5>-->
                 </div>
 
-                <span><h4>总价：</h4><h5 ng-model="plan.final_price" ng-init="0" ng-bind="plan.final_price = getPlanTotal()"></h5></span>
+                <span><h4>总价：</h4><h5 ng-model="plan.final_price" ng-init="0"
+                                      ng-bind="plan.final_price = getPlanTotal()"></h5></span>
             </div>
         </div>
 

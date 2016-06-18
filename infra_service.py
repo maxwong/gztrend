@@ -33,6 +33,7 @@ class InfraService:
             plan.description = plan_data['description'].strip()
             plan.footer = plan_data['footer'].strip()
             plan.comments = plan_data['comments'].strip()
+            plan.type = plan_data['type'].strip()
             plan.status = 1
 
             session.add(plan)

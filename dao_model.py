@@ -21,6 +21,7 @@ class Plan(Base):
     __tablename__ = 'plans'
     plan_id = Column(BigInteger, primary_key=True)
     name = Column(String(160), nullable=False)
+    type = Column(String(160))
     section_relation = Column(String(160))
     description = Column(String(2000))
     footer = Column(String(2000))

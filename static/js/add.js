@@ -58,6 +58,7 @@ function submit() {
     var section_elements = $("#section > div");
 
     var plan = {};
+    plan["type"] = $("#plan_type").val().trim();
     plan["name"] = $("#plan_name").val().trim();
     plan["description"] = $("#plan_description").val().trim();
     plan["footer"] = $("#plan_footer").val().trim();

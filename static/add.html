@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>新增</title>
-<script type="text/javascript" src="lib/js/jquery-1.12.0.min.js"></script>
-<script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="lib/js/angular.min.js"></script>
-<script type="text/javascript" src="js/conf.js"></script>
-<script type="text/javascript" src="js/add.js"></script>
-<link rel="stylesheet" href="lib/css/bootstrap.min.css">
-<link rel="stylesheet" href="lib/css/bootstrap-theme.min.css">
+    <script type="text/javascript" src="lib/js/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="lib/js/angular.min.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/conf.js"></script>
+    <script type="text/javascript" src="js/add.js"></script>
+    <link rel="stylesheet" href="lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/css/bootstrap-theme.min.css">
 
-<style>
-</style>
+    <style>
+    </style>
 </head>
 <body>
 <div class="container">
@@ -22,12 +23,17 @@
             <div class="panel-heading"><h4>新增方案</h4></div>
             <div class="panel-body">
                 <div>
+                    <div><b>设备类型</b></div>
+                    <input type="text" id="plan_type">
+                </div>
+                <div>
                     <div><b>设备名称</b></div>
                     <input type="text" id="plan_name">
                 </div>
                 <div>
                     <div><b>设备概况</b></div>
-                    <textarea rows="6" cols="80" id="plan_description" ng-model="plan.description" ng-value="plan.description"></textarea>
+                    <textarea rows="6" cols="80" id="plan_description" ng-model="plan.description"
+                              ng-value="plan.description"></textarea>
                 </div>
                 <hr/>
                 <div id="section">
@@ -46,14 +52,36 @@
                 </div>
             </div>
 
-        <div class="panel-footer">
-            <button id="submit" type="button" class="btn btn-default" onclick="submit()">提交</button>
+            <div class="panel-footer">
+                <button id="submit" type="button" class="btn btn-default" data-toggle="modal"
+                        data-target="#submit_confirmation">提交
+                </button>
+            </div>
+
+            <div id="submit_confirmation" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">确认</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>确定要提交吗?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="submit()">确认
+                            </button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
+    <hr/>
+    <div id="result" class="container"></div>
+    <div id="footer"></div>
 </div>
-<hr/>
-<div id="result" class="container">
-</div>
-<div id="footer"></div>
 </body>
 </html>
