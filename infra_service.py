@@ -118,9 +118,14 @@ class InfraService:
         print data
         return
 
-    def get_plan_summary(self):
+    def get_plan_summary(self, type):
         session = db_session()
-        plans = session.query(Plan).all()
+        if type is None or type.strip() == '':
+            plans = session.query(Plan).all()
+        else:
+            if type == '_NULL':
+                type = None
+            plans = session.query(Plan).filter(Plan.type == type).all()
 
         result = []
         for plan in plans:
@@ -251,6 +256,19 @@ class InfraService:
         result['errcode'] = 0
         result['msg'] = 'ok'
         return result
+
+    def get_type(self):
+        session = db_session()
+        types = session.query(Plan.type).group_by(Plan.type).all()
+
+        result = []
+
+        for type in types:
+            result.append(type.type)
+
+        result.sort()
+        return result
+
 
     def save_order(self, content):
         session = db_session()

@@ -21,8 +21,9 @@ def add_plan():
 
 @app.route('/plan', methods=['GET'])
 def get_plan():
+    type = request.args.get('type').strip()
     infra_service = InfraService()
-    summary = infra_service.get_plan_summary()
+    summary = infra_service.get_plan_summary(type)
     return json.dumps(summary, ensure_ascii=False)
 
 
@@ -78,6 +79,14 @@ def export():
 
     return send_file(output, as_attachment=True)
 #    return 'done'
+
+
+@app.route('/type', methods=['GET'])
+def type():
+    infra_service = InfraService()
+    result = infra_service.get_type()
+
+    return json.dumps(result, ensure_ascii=False)
 
 
 @app.route('/')
