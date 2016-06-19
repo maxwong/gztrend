@@ -9,7 +9,8 @@ class Exporter:
 
     offset_row = 0
     offset_col = 0
-    output_dir = r'/home/maxwong/temp/'
+#    output_dir = r'/home/maxwong/temp/'
+    output_dir = r'/Users/maxwong/temp/'
 
     def __init__(self):
         self.default_max_col = 11

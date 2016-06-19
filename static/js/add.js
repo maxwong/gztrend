@@ -104,10 +104,10 @@ function submit() {
         method: 'post',
         data: {'data': param},
         success: function(data) {
-            console.log('success');
+            location.href = 'success.html';
         },
         failed: function(data) {
-            console.log('failed');
+            alert('添加失败,请联系管理员');
         }
     });
     console.log(plan);
