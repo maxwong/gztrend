@@ -114,6 +114,8 @@ class InfraService:
         except Exception:
             traceback.print_exc()
             session.rollback()
+        finally:
+            session.close()
 
         print data
         return
@@ -121,11 +123,11 @@ class InfraService:
     def get_plan_summary(self, type):
         session = db_session()
         if type is None or type.strip() == '':
-            plans = session.query(Plan).all()
+            plans = session.query(Plan).filter(Plan.status == 1).all()
         else:
             if type == '_NULL':
                 type = None
-            plans = session.query(Plan).filter(Plan.type == type).all()
+            plans = session.query(Plan).filter(Plan.type == type, Plan.status == 1).all()
 
         result = []
         for plan in plans:
@@ -134,6 +136,7 @@ class InfraService:
             cur_summary['name'] = plan.name
             result.append(cur_summary)
 
+        session.close()
         return result
 
     def get_sections(self, plan_id):
@@ -144,14 +147,14 @@ class InfraService:
             result['errcode'] = 1
             result['msg'] = 'plan_id is None'
 
-        plan = session.query(Plan).filter(Plan.plan_id == plan_id).one()
+        plan = session.query(Plan).filter(Plan.plan_id == plan_id, Plan.status == 1).one()
 
         result['name'] = plan.name
         result['section_relation'] = plan.section_relation
         result['description'] = plan.description
         result['footer'] = plan.footer
         result['comments'] = plan.comments
-        sections = session.query(Section).filter(Section.plan_id == plan_id).all()
+        sections = session.query(Section).filter(Section.plan_id == plan_id, Section.status == 1).all()
 
         section_list = list()
         for section in sections:
@@ -163,6 +166,7 @@ class InfraService:
             section_list.append(section_info)
 
         result['sections'] = section_list
+        session.close()
         return result
 
     def get_details(self, plan_id, section_ids):
@@ -177,7 +181,7 @@ class InfraService:
             result['errcode'] = 2
             result['msg'] = 'section_ids is None'
 
-        plan = session.query(Plan).filter(Plan.plan_id == plan_id).one()
+        plan = session.query(Plan).filter(Plan.plan_id == plan_id, Plan.status == 1).one()
 
         result['plan_id'] = plan_id
         result['name'] = plan.name
@@ -189,13 +193,13 @@ class InfraService:
         section_results = list()
         result['sections'] = section_results
 
-        sections = session.query(Section).order_by(Section.sequence).filter(Section.section_id.in_(section_ids)).all()
+        sections = session.query(Section).order_by(Section.sequence).filter(Section.section_id.in_(section_ids), Section.status == 1).all()
 
         for section in sections:
             # get session_materials per section
             section_materials = session.query(SectionMaterial) \
                 .order_by(SectionMaterial.sequence.asc(), SectionMaterial.priority.asc()) \
-                .filter(SectionMaterial.section_id == section.section_id).all()
+                .filter(SectionMaterial.section_id == section.section_id, SectionMaterial.status == 1).all()
 
             # construct material_ids to get concrete materials
             material_ids = list()
@@ -255,6 +259,7 @@ class InfraService:
 
         result['errcode'] = 0
         result['msg'] = 'ok'
+        session.close()
         return result
 
     def get_type(self):
@@ -267,6 +272,7 @@ class InfraService:
             result.append(type.type)
 
         result.sort()
+        session.close()
         return result
 
 
@@ -278,7 +284,7 @@ class InfraService:
         session.add(order)
 
         session.commit()
-
+        session.close()
         return order.order_id
 
     def export_detail(self, order_id):
@@ -288,13 +294,16 @@ class InfraService:
         exporter = Exporter()
         output = exporter.export_detail(order.content, order.order_id.__str__() + '_内部版')
 
+        session.close()
         return output
 
     def export_summary(self, order_id):
         session = db_session()
+        session.close()
         return
 
     def run(self):
         session = db_session()
         plan = session.query(Plan).one()
+        session.close()
         return plan
