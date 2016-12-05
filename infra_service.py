@@ -10,7 +10,7 @@ import logging
 import json
 import traceback
 
-db_engine = create_engine('mysql+pymysql://root:123@localhost:3306/gztrend?charset=utf8mb4', encoding='utf8', echo=True,
+db_engine = create_engine('mysql+pymysql://gztrend:gztrend@localhost:3306/gztrend?charset=utf8mb4', encoding='utf8', echo=True,
                           pool_size=4)
 Base.metadata.bind = db_engine
 db_session = sessionmaker(bind=db_engine)

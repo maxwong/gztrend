@@ -48,7 +48,9 @@ class SectionMaterial(Base):
     sequence = Column(Integer, nullable=False)
     default_quantity = Column(Integer, nullable=False)
     priority = Column(Integer, nullable=False)
-    is_fixed_amount = Column(Boolean, nullable=False, default=True)
+    is_fixed_amount = Column(Boolean, nullable=False, default=False)
+    is_fixed_price = Column(Boolean, nullable=False, default=False)
+    price_formula = Column(String, nullable=True)
     status = Column(Boolean, nullable=False, default=True)
 
 class Order(Base):
