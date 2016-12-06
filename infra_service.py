@@ -95,6 +95,9 @@ class InfraService:
                     section_material.material_id = material.material_id
                     section_material.sequence = sequence
                     section_material.default_quantity = material_data['default_quantity']
+                    section_material.is_fixed_amount = material_data['is_fixed_amount']
+                    section_material.is_fixed_price = material_data['is_fixed_price']
+                    section_material.price_formula = material_data['price_formula']
 
                     if priorities_dict.has_key(sequence) is False:
                         priorities_dict[sequence] = 0
@@ -104,7 +107,6 @@ class InfraService:
                     section_material.priority = priority
                     priorities_dict[sequence] = priority + 1
 
-                    section_material.is_fixed_amount = 0
                     section_material.status = 1
 
                     session.add(section_material)
@@ -114,6 +116,7 @@ class InfraService:
         except Exception:
             traceback.print_exc()
             session.rollback()
+            raise
         finally:
             session.close()
 
@@ -235,6 +238,9 @@ class InfraService:
                 material_result['priority'] = section_material.priority
                 material_result['sequence'] = sequence
                 material_result['default_quantity'] = section_material.default_quantity
+                material_result['is_fixed_amount'] = section_material.is_fixed_amount
+                material_result['is_fixed_price'] = section_material.is_fixed_price
+                material_result['price_formula'] = section_material.price_formula
 
                 if sequence not in material_grouped_dict:
                     material_grouped_dict[sequence] = list()

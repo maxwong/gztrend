@@ -23,6 +23,9 @@ function add_section() {
                                     <th>数量</th> \
                                     <th>单价(元)</th> \
                                     <th>备注</th> \
+                                    <th>是否固定数量</th>\
+                                    <th>是否固定价格</th>\
+                                    <th>价格变动公式</th>\
                                 </tr> \
                             </thead> \
                             <tbody id="tbody_<n>"> \
@@ -49,6 +52,9 @@ function add_material(number) {
                     <td><input type="text" size="3"></td> \
                     <td><input type="text" size="10"></td> \
                     <td><input type="text" size="20"></td> \
+                    <td><input type="checkbox"></td> \
+                    <td><input type="checkbox"></td>\
+                    <td><input type="text" size="20"></td>\
         </tr>');
 
     console.log(number);
@@ -87,6 +93,9 @@ function submit() {
             material["default_quantity"] = col[5].value.trim();
             material["unit_price"] = col[6].value.trim();
             material["comments"] = col[7].value.trim();
+            material["is_fixed_amount"] = col[8].checked;
+            material["is_fixed_price"] = col[9].checked;
+            material["price_formula"] = col[10].value.trim();
 
             section_materials.push(material);
         }
