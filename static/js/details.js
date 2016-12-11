@@ -64,6 +64,32 @@ details.controller('detailsCtrl', function ($scope, detailsService) {
 
     };
 
+    $scope.initSection = function() {
+        $scope.formulaParamScope = {};
+    };
+
+    $scope.getPrice = function (material) {
+        if (material.is_fixed_price || material.price_formula == null || material.price_formula.trim() == "") {
+            return material.unit_price;
+        }
+
+        var formula = material.price_formula, result = 0;
+
+        var definitionRegex = /(^\S+)\s*\=\s*(\d+)\s*$/
+        var matches = definitionRegex.exec(formula);
+
+        if (matches != null) {
+            $scope.formulaParamScope[matches[1]] = matches[2];
+
+            result = material.unit_price;
+        } else {
+            result = math.eval(formula, $scope.formulaParamScope);
+        }
+
+
+        return result;
+    };
+
     $scope.getSectionTotal = function (index) {
         var sectionTotal = 0;
         var section = $scope.plan.sections[index];

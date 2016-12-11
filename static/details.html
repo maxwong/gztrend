@@ -9,6 +9,7 @@
     <script type="text/javascript" src="js/conf.js"></script>
     <script type="text/javascript" src="js/details.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="lib/js/math.min.js"></script>
     <link rel="stylesheet" href="lib/css/bootstrap.min.css">
     <link rel="stylesheet" href="lib/css/bootstrap-theme.min.css">
 
@@ -27,7 +28,7 @@
                     <textarea rows="6" cols="80" ng-model="plan.description" ng-value="plan.description"></textarea>
                 </div>
                 <hr/>
-                <div ng-repeat="section in plan.sections" ng-attr-id="section.section_id">
+                <div ng-repeat="section in plan.sections" ng-attr-id="section.section_id" ng-init="initSection()">
                     <label ng-bind="($index + 1) + '&nbsp;&nbsp;'"></label>
                     <input type="text" ng-model="section.name" ng-value="section.name">
                     <hr/>
@@ -67,7 +68,7 @@
                             <td><input type="text" size="3" ng-init="material[0].quantity=material[0].default_quantity"
                                        ng-model="material[0].quantity" ng-value="material[0].default_quantity"></td>
                             <td ng-init="material[0].selected_unit_price = material[0].unit_price"
-                                ng-model="material[0].selected_unit_price" ng-bind="material[0].selected_unit_price">
+                                ng-model="material[0].selected_unit_price" ng-bind="material[0].selected_unit_price=getPrice(material[0])">
                                 40500
                             </td>
                             <td ng-model="material[0].original_price"
